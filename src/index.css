@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Cybersecurity Dark Theme */
+    --background: 220 25% 6%;
+    --foreground: 210 100% 95%;
+
+    --card: 220 20% 10%;
+    --card-foreground: 210 100% 95%;
+
+    --popover: 220 25% 8%;
+    --popover-foreground: 210 100% 95%;
+
+    /* Neon Blue Primary */
+    --primary: 210 100% 55%;
+    --primary-foreground: 220 25% 6%;
+    --primary-glow: 210 100% 65%;
+
+    /* Neon Green Accent */
+    --secondary: 150 100% 45%;
+    --secondary-foreground: 220 25% 6%;
+    --secondary-glow: 150 100% 55%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 210 20% 60%;
+
+    --accent: 150 100% 45%;
+    --accent-foreground: 220 25% 6%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 210 100% 95%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 15%;
+    --ring: 210 100% 55%;
+
+    --radius: 0.75rem;
+
+    /* Cyber Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(210 100% 55% / 0.8), hsl(150 100% 45% / 0.8));
+    --gradient-dark: linear-gradient(180deg, hsl(220 25% 6%), hsl(220 25% 10%));
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsl(210 100% 55% / 0.15), transparent 70%);
+    
+    /* Shadows & Glows */
+    --shadow-neon-blue: 0 0 20px hsl(210 100% 55% / 0.5), 0 0 40px hsl(210 100% 55% / 0.3);
+    --shadow-neon-green: 0 0 20px hsl(150 100% 45% / 0.5), 0 0 40px hsl(150 100% 45% / 0.3);
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-hover {
+    transition: var(--transition-smooth);
+  }
+
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: hsl(var(--primary) / 0.3);
+    box-shadow: var(--shadow-neon-blue);
+    transform: translateY(-4px);
+  }
+
+  /* Neon Text Effects */
+  .neon-text {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.8),
+                 0 0 20px hsl(var(--primary) / 0.6),
+                 0 0 30px hsl(var(--primary) / 0.4);
+  }
+
+  .neon-text-green {
+    text-shadow: 0 0 10px hsl(var(--secondary) / 0.8),
+                 0 0 20px hsl(var(--secondary) / 0.6),
+                 0 0 30px hsl(var(--secondary) / 0.4);
+  }
+
+  /* Animated Gradient Border */
+  .gradient-border {
+    position: relative;
+    border-radius: var(--radius);
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius);
+    padding: 2px;
+    background: var(--gradient-cyber);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.6;
+    transition: var(--transition-smooth);
+  }
+
+  .gradient-border:hover::before {
+    opacity: 1;
+  }
+
+  /* Cyber Grid Background */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 140, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 140, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Pulse Animation */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.4);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--primary) / 0.8), 0 0 60px hsl(var(--primary) / 0.4);
+    }
+  }
+}
